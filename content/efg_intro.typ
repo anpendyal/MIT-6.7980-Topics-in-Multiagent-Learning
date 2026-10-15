@@ -59,7 +59,7 @@ A standard assumption in extensive-form games is that no player forgets about th
   A player $i in \[ n \]$ is said to have _perfect recall_ if, for any information set $I in cal(I)_i$, for any two histories $h \, h' in I$ the sequence of Player $i$'s actions encountered along the path from the root to $h$ and from the root to $h'$ must coincide (or otherwise Player $i$ would be able to distinguish among the histories, since the player remembers all of the actions they played in the past). The game is perfect recall if all players have perfect recall.
 ] <def:perfect-recall>
 
-When perfect recall fails, much of the machinery developed in this lecture breaks down: Kuhn's theorem no longer holds, computing an optimal strategy becomes NP-hard even for a single player, and it is not even clear what “optimal” should mean once a player can reach the same information set more than once in a single play. The Sleeping Beauty problem is a well-known illustration of this last difficulty. See Appendix L7.A for a longer discussion.
+When perfect recall fails, much of the machinery developed in this lecture breaks down: Kuhn's theorem~(@thm:kuhn) no longer holds, computing an optimal strategy becomes NP-hard even for a single player, and it is not even clear what “optimal” should mean once a player can reach the same information set more than once in a single play. The Sleeping Beauty problem#footnote[#link("https://en.wikipedia.org/wiki/Sleeping_Beauty_problem")] is a well-known illustration of this last difficulty. See #ref(<sec-imperfect-recall>, supplement: [Appendix]) for a longer discussion.
 
 = Player's perspective: Tree-form decision processes <sec-tfdp>
 
@@ -201,7 +201,7 @@ A different conceptualization of a strategy for a player is as a choice of (inde
 
 #theorem[Kuhn's theorem][
   In a perfect recall extensive-form game, any distribution over terminal nodes that can be induced via normal-form strategies can be induced via behavioral strategies, and _vice versa_.
-]
+] <thm:kuhn>
 
 == Sequence form <sec-sequence-form>
 
@@ -237,3 +237,8 @@ Conversely, it is easy to see that any $vx$ that satisfies the above constraints
 = Bibliography for this lecture
 
 #lec_bibliography("meta/refs.bib", title: none)
+
+
+#appendix[
+  = Imperfect recall <sec-imperfect-recall>
+]
