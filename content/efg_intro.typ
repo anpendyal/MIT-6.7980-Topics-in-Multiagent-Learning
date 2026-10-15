@@ -59,6 +59,8 @@ A standard assumption in extensive-form games is that no player forgets about th
   A player $i in \[ n \]$ is said to have _perfect recall_ if, for any information set $I in cal(I)_i$, for any two histories $h \, h' in I$ the sequence of Player $i$'s actions encountered along the path from the root to $h$ and from the root to $h'$ must coincide (or otherwise Player $i$ would be able to distinguish among the histories, since the player remembers all of the actions they played in the past). The game is perfect recall if all players have perfect recall.
 ] <def:perfect-recall>
 
+When perfect recall fails, much of the machinery developed in this lecture breaks down: Kuhn's theorem no longer holds, computing an optimal strategy becomes NP-hard even for a single player, and it is not even clear what “optimal” should mean once a player can reach the same information set more than once in a single play. The Sleeping Beauty problem is a well-known illustration of this last difficulty. See Appendix L7.A for a longer discussion.
+
 = Player's perspective: Tree-form decision processes <sec-tfdp>
 
 The game tree representation introduced above provides a description of the global dynamics of the game, without taking the side of any player in particular. But what is the strategy space from the point of view of _one_ decision maker (player) in the game? In a normal-form game, the strategy space of a player is a set of probability distributions over the set of actions available to that player. In an extensive-form game, the strategy space of a player is a _tree-form decision process (TFDP)_.
