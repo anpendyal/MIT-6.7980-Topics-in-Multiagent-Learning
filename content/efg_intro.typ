@@ -59,7 +59,7 @@ A standard assumption in extensive-form games is that no player forgets about th
   A player $i in \[ n \]$ is said to have _perfect recall_ if, for any information set $I in cal(I)_i$, for any two histories $h \, h' in I$ the sequence of Player $i$'s actions encountered along the path from the root to $h$ and from the root to $h'$ must coincide (or otherwise Player $i$ would be able to distinguish among the histories, since the player remembers all of the actions they played in the past). The game is perfect recall if all players have perfect recall.
 ] <def:perfect-recall>
 
-When perfect recall fails, much of the machinery developed in this lecture breaks down: Kuhn's theorem~(@thm:kuhn) no longer holds, computing an optimal strategy becomes NP-hard even for a single player, and it is not even clear what “optimal” should mean once a player can reach the same information set more than once in a single play. The Sleeping Beauty problem#footnote[#link("https://en.wikipedia.org/wiki/Sleeping_Beauty_problem")] is a well-known illustration of this last difficulty. See #ref(<sec-imperfect-recall>, supplement: [Appendix]) for a longer discussion.
+When perfect recall no longer holds, many of the building blocks discussed in this lecture break down. For example, Kuhn's theorem~(@thm:kuhn) no longer holds, computing an optimal strategy becomes NP-hard even for a single player, and it is not even clear what “optimal” means once a player can reach the same information set more than once in a single play. The Sleeping Beauty problem#footnote[#link("https://en.wikipedia.org/wiki/Sleeping_Beauty_problem")] is a well-known illustration of this last difficulty. See #ref(<sec-imperfect-recall>, supplement: [Appendix]) for a longer discussion.
 
 = Player's perspective: Tree-form decision processes <sec-tfdp>
 
@@ -244,32 +244,33 @@ Conversely, it is easy to see that any $vx$ that satisfies the above constraints
 
   == Definition
 
-  Imperfect recall is simply the failure of @def:perfect-recall.
+  We define imperfect recall as simply the failure of perfect recall (@def:perfect-recall).
 
   #definition[Imperfect recall][
     A player $i in \[ n \]$ has _imperfect recall_ if there exist an information set $I in cal(I)_i$ and two histories $h \, h' in I$ such that the sequence of Player $i$'s actions on the path from the root to $h$ differs from the sequence of Player $i$'s actions on the path from the root to $h'$.
   ] <def:imperfect-recall>
 
-  Intuitively, the player has acted differently on the way to $h$ and to $h'$, yet cannot tell the two apart, so they must have forgotten something they once knew. An extreme case is _absentmindedness_, where $h$ lies on the path from the root to $h'$: the player can reach the same information set twice in a single play without knowing which visit it is.
+  In other words, we can think of this as the player having acted differently on the way to h and h', but they cannot tell the two apart, so they must have forgotten something they once knew. _Absentmindedness_ is an extreme case of this. It is defined as $h$ lying on the path from the root to $h'$ and the player can reach the same information set twice in a single play without knowing which visit it is.
 
-  == Why imperfect recall breaks things
+  == What happens when perfect recall fails
+  Here we expand on the points briefly mentioned in #ref(<sec-perfect-recall>).
 
-  *Kuhn's theorem fails.* Suppose a player picks $upsans(L)$ or $upsans(R)$, forgets the choice, and later picks $upsans(l)$ or $upsans(r)$. Mixing over the plans $(upsans(L) \, upsans(l))$ and $(upsans(R) \, upsans(r))$ makes the two choices always match, but a behavioral strategy randomizes independently at each information set and cannot reproduce this. So @thm:kuhn no longer holds.
+  *Kuhn's theorem fails.* Suppose a player picks $upsans(L)$ or $upsans(R)$, forgets the choice, and later picks $upsans(l)$ or $upsans(r)$. A mixed strategy can flip one coin at the start and play either $(upsans(L) \, upsans(l))$ or $(upsans(R) \, upsans(r))$. A behavioral strategy flips a different coin at each decision, and the second coin cannot depend on the first coin since the player forgot the first choice. The two independent coins cannot always agree unless neither is random, so no behavioral strategy produces the same outcomes, and Kuhn's theorem (@thm:kuhn) no longer holds.
 
-  *The sequence form breaks.* Building a TFDP (@def:tfdp) requires every history in an information set to have the same trace, which is exactly what perfect recall guarantees. Without it, the parent sequence $p_j$ is not well defined and the sequence-form polytope (@def:sf) no longer describes the player's strategies. In fact, finding an optimal strategy becomes NP-hard even for a single player.
+  *The sequence form breaks.* When building a TFDP, we require that every history in an information set has the same trace, which is what perfect recall guarantees. However, without perfect recall, the parent sequence $p_j$ is not well defined and the sequence-form polytope (@def:sf) no longer describes the player's strategies. Thus, finding an optimal strategy becomes NP-hard even for a single player with perfect recall.
   // single player~#citep(<Koller92:Complexity>).
 
-  *"Optimal" becomes unclear.* With perfect recall, a player who reaches an information set knows how likely each history in it is, so it is clear what the best action there is. Under absentmindedness, the player may be at the same information set for the first or the second time, and it is no longer obvious how to weigh these possibilities. The Sleeping Beauty problem shows that reasonable people disagree on the answer.
+  *"Optimal" becomes unclear.* Under perfect recall, when a player reaches an information set, they know how likely each history in it is, so it is clear what the optimal action is. Under absentmindedness, the player may be at the same information set for the first or the second time, and it is no longer obvious how to weigh these possibilities. 
 
   == The Sleeping Beauty problem
 
-  In the #link("https://en.wikipedia.org/wiki/Sleeping_Beauty_problem")[Sleeping Beauty problem], Beauty is put to sleep on Sunday and a fair coin is tossed. If it lands heads, she is woken on Monday and the experiment ends. If it lands tails, she is woken on Monday, given a drug that erases her memory of that awakening, and woken again on Tuesday. Every awakening feels the same to her. Each time she wakes, she is asked: _how likely is it that the coin landed heads?_
+  In the #link("https://en.wikipedia.org/wiki/Sleeping_Beauty_problem")[Sleeping Beauty problem], Sleeping Beauty is put to sleep on Sunday and a fair coin is tossed. If it lands heads, she is woken on Monday and the experiment ends. If it lands tails, she is woken on Monday, given a drug that erases her memory of that awakening, and woken again on Tuesday. She has no way of differentiating between awakenings, that is, every awakening feels the same to her. Whenever she wakes up, she is asked to predict how likely it is that the coin landed heads.
+  
   // *Halfers* #citep(<Lewis01:Sleeping>)
-  - *Halfers* answer $1\/2$. Before going to sleep, Beauty knew the coin was fair, and she knew she would wake up at least once no matter what. Waking up therefore tells her nothing new, so her belief should not change.
+  - *Halfers* answer $1\/2$. Before going to sleep, Sleeping Beauty knew the coin was fair, and she knew she would wake up at least once no matter what. Waking up therefore tells her nothing new, so her belief should not change and it should remain at $1\/2$.
   // *Thirders* #citep(<Elga00:Self>
-  - *Thirders* answer $1\/3$. When she wakes, Beauty could be in one of three situations: heads and Monday, tails and Monday, or tails and Tuesday. She cannot tell them apart, and if the experiment were repeated many times, only one in three awakenings would follow heads.
+  - *Thirders* answer $1\/3$. When she wakes, Sleeping Beauty could be in one of three situations: 1) heads and Monday, 2) tails and Monday, or 3) tails and Tuesday. She cannot tell these three situations apart. If the experiment were repeated 100 times, about 50 runs would land heads and produce one awakening each, while about 50 runs would land tails and produce two awakenings each. Therefore, in this example, there are 150 awakenings, but only 50 of them were a result of the heads, so the answer is $1\/3$.
+  
 
-  *Why it is relevant.* As a game tree, the problem has a chance node choosing heads or tails, and Beauty's three possible awakenings form a single information set. Since the tails-Monday awakening lies on the path to the tails-Tuesday awakening, this information set is absentminded. The halfer counts each _play_ of the game once, while the thirder counts each _visit_ to the information set once; the game tree does not say which is correct.
-
-  This disagreement directly affects decisions. If Beauty is offered a bet on heads at every awakening and every bet counts, a tails run produces two bets, and the thirder's $1\/3$ gives the right price. If only one bet per run counts, the halfer's $1\/2$ is right. In other words, under imperfect recall, what counts as "optimal" depends on modeling choices that the game itself leaves open.
+  *Why it is relevant.* Viewing this as a game tree, we see that the three possible awakenings form a single information set. In fact, this informaiton set is absentminded because the tails-Monday awakening lies on the path to the tails-Tuesday awakening. The halfer counts each play of the game once, while the thirder counts each visit to the information set once, and the game tree does not distinguish between these two in terms of correctness. Under imperfect recall, optimality depends on modeling choices. In the context of the Sleeping Beauty problem, if she is offered a bet on heads at every awakening and every bet counts, a tails run produces two bets, and the thirders are correct. If only one bet per run counts, the halfers are right.
 ]
