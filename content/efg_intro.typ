@@ -233,21 +233,21 @@ Conversely, it is easy to see that any $vx$ that satisfies the above constraints
 ]
 
 #example[
-  Expected utility is a sum over terminal nodes:
+  Consider a two-player extensive-form game with perfect recall, such as Kuhn poker, in which the chance player $c$ may also act. Let $vx in cal(Q)_1$ and $vy in cal(Q)_2$ be sequence-form strategies of Player 1 and Player 2, where $cal(Q)_i$ denotes the sequence-form polytope (@def:sf) of Player $i$'s tree-form decision process. As before, $Z$ is the set of terminal nodes and $u_1 (z)$ is Player 1's payoff at $z in Z$. Player 1's expected utility is a sum over terminal nodes:
   $
-  u_1 (vx \, vy) & = sum_(z in Z) u_1 (z) dot.op bb(P) [z "is reached"] \
-  & = sum_(z in Z) u_1 (z) dot.op p_c (z) dot.op x_(sigma_1 (z)) dot.op y_(sigma_2 (z)) ,
-$
-where $p_c (z)$ is the product of nature's action probabilities on the path to $z$, and $sigma_i (z)$ is the last sequence of Player $i$ on that path ($∅$ if Player $i$ does not act on it, with $x_∅ = y_∅ = 1$). 
-    
-Here, we factor the reach probability into three independent parts: 1) nature's probability, 2) the product of Player 1's own action probabilities on the path to $z$, and 3) the product of Player 2's.
+    u_1 (vx \, vy) & = sum_(z in Z) u_1 (z) dot.op bb(P) [z "is reached"] \
+    & = sum_(z in Z) u_1 (z) dot.op p_c (z) dot.op x_(sigma_1 (z)) dot.op y_(sigma_2 (z)) ,
+  $
+  where $p_c (z)$ is the product of the chance player's action probabilities on the path to $z$, and $sigma_i (z)$ is the last sequence of Player $i$ on that path ($∅$ if Player $i$ does not act on it, with $x_∅ = y_∅ = 1$). 
+      
+  Here, we factor the reach probability into three independent parts: 1) the chance player's probability, 2) the product of Player 1's own action probabilities on the path to $z$, and 3) the product of Player 2's.
 
-*Behavioral form:* Player 1's part is a product of several variables, which makes the payoff nonlinear. For example, with behavioral probabilities, reaching the "check, opponent bets, fold" leaf contributes $x_(upsans(A \, c h k)) dot.op x_(upsans(D \, f o l d))$. 
+  *Behavioral form:* Player 1's part is a product of several variables, which makes the payoff nonlinear. For example, with behavioral probabilities, reaching the "check, opponent bets, fold" leaf contributes $x_(upsans(A \, c h k)) dot.op x_(upsans(D \, f o l d))$. 
 
-*Sequence form:* that product is by definition a single entry. $x_(upsans(D \, f o l d))$ already stores the probability of "checking at $upsans(A)$ and folding at $upsans(D)$". Therefore, Player 1's entire contribution to reaching $z$ is one variable, the entry for the last sequence of Player 1 on the path to $z$.
+  *Sequence form:* that product is by definition a single entry. $x_(upsans(D \, f o l d))$ already stores the probability of "checking at $upsans(A)$ and folding at $upsans(D)$". Therefore, Player 1's entire contribution to reaching $z$ is one variable, the entry for the last sequence of Player 1 on the path to $z$.
 
-This is why each term in the sum becomes $u_1 (z) dot.op p_c (z) dot.op x_(sigma_1 (z)) dot.op y_(sigma_2 (z))$. Fixing the opponent's strategy $vy$ means that each term in the sum is a constant times a single entry of $vx$, so the payoff is linear in $vx$ and, symmetrically, linear in $vy$.
-  ]
+  This is why each term in the sum becomes $u_1 (z) dot.op p_c (z) dot.op x_(sigma_1 (z)) dot.op y_(sigma_2 (z))$. Fixing the opponent's strategy $vy$ means that each term in the sum is a constant times a single entry of $vx$, so the payoff is linear in $vx$ and, symmetrically, linear in $vy$.
+]
 
 *Pros*  This representation of extensive-form games is convex. Hence, we can use all the convex optimization tools we have seen so far.
 
