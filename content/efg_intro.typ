@@ -259,7 +259,7 @@ Conversely, it is easy to see that any $vx$ that satisfies the above constraints
 #appendix[
   = Imperfect recall <sec-imperfect-recall>
 
-  == Definition
+  == Definitions
 
   Imperfect recall is simply the failure of perfect recall (@def:perfect-recall).
 
@@ -267,7 +267,13 @@ Conversely, it is easy to see that any $vx$ that satisfies the above constraints
     A player $i in \[ n \]$ has _imperfect recall_ if there exist an information set $I in cal(I)_i$ and two histories $h \, h' in I$ such that the sequence of Player $i$'s actions on the path from the root to $h$ differs from the sequence of Player $i$'s actions on the path from the root to $h'$.
   ] <def:imperfect-recall>
 
-  In other words, we can think of this as the player having acted differently on the way to $h$ and $h'$, but they cannot tell the two apart, so they must have forgotten something they once knew. _Absentmindedness_~#citep(<Piccione97:Interpretation>) is an extreme case of this. It occurs when $h$ lies on the path from the root to $h'$, so the player can reach the same information set twice in a single play without knowing which visit it is.
+  In other words, we can think of this as the player having acted differently on the way to $h$ and $h'$, but they cannot tell the two apart, so they must have forgotten something they once knew. An extreme form of imperfect recall is _absentmindedness_~#citep(<Piccione97:Interpretation>).
+
+  #definition[Absentmindedness][
+    An information set $I in cal(I)_i$ of Player $i$ is _absentminded_ if it contains two distinct histories $h \, h' in I$ such that $h$ lies on the path from the root to $h'$.
+  ] <def:absentminded>
+
+  At an absentminded information set, the player can reach the same information set twice in a single play without knowing which visit it is. Since Player $i$ acts at $h$ on the way to $h'$, the sequences of Player $i$'s actions leading to $h$ and to $h'$ differ, so absentmindedness is a special case of imperfect recall (@def:imperfect-recall).
 
   == What happens when perfect recall fails
   Here we expand on the points briefly mentioned in @sec-perfect-recall.
@@ -276,7 +282,7 @@ Conversely, it is easy to see that any $vx$ that satisfies the above constraints
 
   *The sequence form breaks.* When building a TFDP, we require that every history in an information set has the same trace, which is what perfect recall guarantees. However, without perfect recall, the parent sequence $p_j$ is not well defined and the sequence-form polytope (@def:sf) no longer describes the player's strategies. Thus, finding an optimal strategy becomes NP-hard even for a single player with imperfect recall~#citep(<Koller92:Complexity>).
 
-  *"Optimal" becomes unclear.* Under perfect recall, when a player reaches an information set, they know how likely each history in it is, so it is clear what the optimal action is. Under absentmindedness, the player may be at the same information set for the first or the second time, and it is no longer obvious how to weigh these possibilities~#citep(<Piccione97:Interpretation>).
+  *"Optimal" becomes unclear.* Under perfect recall, when a player reaches an information set, they know how likely each history in it is, so it is clear what the optimal action is. At an absentminded information set (@def:absentminded), the player may be at the same information set for the first or the second time, and it is no longer obvious how to weigh these possibilities~#citep(<Piccione97:Interpretation>).
 
   == The Sleeping Beauty problem
 
@@ -287,5 +293,5 @@ Conversely, it is easy to see that any $vx$ that satisfies the above constraints
   - *Thirders*~#citep(<Elga00:Self>) answer $1\/3$. When she wakes, Sleeping Beauty could be in one of three situations: 1) heads and Monday, 2) tails and Monday, or 3) tails and Tuesday. She cannot tell these three situations apart. If the experiment were repeated 100 times, about 50 runs would land heads and produce one awakening each, while about 50 runs would land tails and produce two awakenings each. Of the roughly 150 awakenings, only 50 follow heads, so the answer is $1\/3$.
   
 
-  *Why it is relevant.* Viewing this as a game tree, we see that the three possible awakenings form a single information set. In fact, this information set is absentminded because the tails-Monday awakening lies on the path to the tails-Tuesday awakening. The halfer counts each play of the game once, while the thirder counts each visit to the information set once, and the game tree alone does not determine which is correct. Under imperfect recall, optimality depends on modeling choices. In the context of the Sleeping Beauty problem, if she is offered a bet on heads at every awakening and every bet counts, a tails run produces two bets, and the thirders are correct. If only one bet per run counts, the halfers are right~#citep(<Hitchcock04:Bets>, <Halpern05:Sleeping>).
+  *Why it is relevant.* Viewing this as a game tree, we see that the three possible awakenings form a single information set. In fact, this information set is absentminded (@def:absentminded) because the tails-Monday awakening lies on the path to the tails-Tuesday awakening. The halfer counts each play of the game once, while the thirder counts each visit to the information set once, and the game tree alone does not determine which is correct. Under imperfect recall, optimality depends on modeling choices. In the context of the Sleeping Beauty problem, if she is offered a bet on heads at every awakening and every bet counts, a tails run produces two bets, and the thirders are correct. If only one bet per run counts, the halfers are right~#citep(<Hitchcock04:Bets>, <Halpern05:Sleeping>).
 ]
